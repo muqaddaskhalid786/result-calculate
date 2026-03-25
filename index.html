@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Result System</title>
+
+<style>
+body {
+  font-family: Arial;
+  background: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Card */
+.container {
+  display: flex;
+  width: 600px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Left Side */
+.left {
+  background: #71cae6;
+  color: rgb(51, 48, 48);
+  width: 50%;
+  padding: 20px;
+}
+
+.left h1 {
+  margin: 0;
+}
+
+.result-text {
+  margin-top: 20px;
+}
+
+/* Right Side */
+.right {
+  background: #e9e5ee82;
+  width: 50%;
+  padding: 20px;
+}
+
+input {
+  width: 100%;
+  margin: 8px 0;
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+}
+
+/* Button */
+button {
+  margin-top: 10px;
+  padding: 10px;
+  width: 100%;
+  background: #398bd3;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Left Result -->
+  <div class="left">
+    <h1>Result</h1>
+
+    <div class="result-text">
+      <p>Percentage: <span id="percent">0</span>%</p>
+      <p>Grade: <span id="grade">-</span></p>
+      <p>Total: <span id="total">0</span></p>
+      <h3 id="status"></h3>
+    </div>
+  </div>
+
+  <!-- Right Inputs -->
+  <div class="right">
+    <input type="number" id="math" placeholder="Math">
+    <input type="number" id="urdu" placeholder="Urdu">
+    <input type="number" id="english" placeholder="English">
+    <input type="number" id="comp" placeholder="Computer">
+    <input type="number" id="physics" placeholder="Physics">
+
+    <button onclick="showResult()">Show Result</button>
+  </div>
+
+</div>
+
+<script>
+function showResult() {
+
+  let math = Number(document.getElementById("math").value);
+  let urdu = Number(document.getElementById("urdu").value);
+  let eng = Number(document.getElementById("english").value);
+  let comp = Number(document.getElementById("comp").value);
+  let phy = Number(document.getElementById("physics").value);
+
+  let total = math + urdu + eng + comp + phy;
+  let percent = (total / 500) * 100;
+
+  let grade = "";
+  let status = "";
+
+  // Grade Logic
+  if (percent >= 80) {
+    grade = "A+";
+  } else if (percent >= 70) {
+    grade = "A";
+  } else if (percent >= 60) {
+    grade = "B";
+  } else if (percent >= 50) {
+    grade = "C";
+  } else {
+    grade = "Fail";
+  }
+
+  // Pass/Fail
+  if (percent >= 40) {
+    status = "You Are Pass";
+  } else {
+    status = "You Are Fail";
+  }
+
+  // Show Result
+  document.getElementById("total").innerText = total;
+  document.getElementById("percent").innerText = percent.toFixed(2);
+  document.getElementById("grade").innerText = grade;
+  document.getElementById("status").innerText = status;
+}
+</script>
+
+</body>
+</html>
